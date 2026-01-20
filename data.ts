@@ -2,12 +2,11 @@
 import { KPIData, MonthlyTicketData, RouteData, AudienceData, ChannelData } from './types';
 
 export const mainKPIs: KPIData[] = [
-  { label: 'Total de usuarios', value: '1.654.084', change: '+41.8%', icon: 'users', paid: '1.178.691', organic: '475.393' },
-  { label: 'Tasa de conversión', value: '6,38 %', change: '+15.7%', icon: 'conversion', paid: '9,57 %', organic: '3,19 %' },
-  { label: 'AOV (Carritos)', value: '$ 84.697', change: '+19.4%', icon: 'money', paid: '$ 86.421', organic: '$ 80.321' },
-  { label: 'Carritos', value: '105.585', change: '-13.6%', icon: 'cart', paid: '75.240', organic: '30.345' },
+
+  { label: 'Carritos', value: '105.585', change: '-13.7%', icon: 'cart', paid: '75.240', organic: '30.345' },
   { label: 'Boletos', value: '158.378', change: '-20.8%', icon: 'ticket', paid: '112.855', organic: '45.523' },
-  { label: 'Total de ingresos', value: '$ 8.942.694.993', change: '+3.1%', icon: 'money', paid: '$ 6.372.564.452', organic: '$ 2.570.130.541' },
+  { label: 'AOV (Carritos)', value: '$ 84.697', change: '+65.8%', icon: 'money', paid: '$ 86.421', organic: '$ 80.321' },
+  { label: 'Total de ingresos', value: '$ 8.942.694.993', change: '+43.2%', icon: 'money', paid: '$ 6.372.564.452', organic: '$ 2.570.130.541' },
 ];
 
 export const interannualData: MonthlyTicketData[] = [

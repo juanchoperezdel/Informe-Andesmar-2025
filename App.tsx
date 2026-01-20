@@ -12,7 +12,7 @@ const KPICard: React.FC<{ data: KPIData }> = ({ data }) => (
       <div className="text-andesmar-blue p-2 bg-blue-50 rounded-lg">
         {ICONS[data.icon as keyof typeof ICONS]}
       </div>
-      <span className="text-green-500 font-bold text-sm bg-green-50 px-2 py-1 rounded">
+      <span className={`font-bold text-sm px-2 py-1 rounded ${data.change.startsWith('-') ? 'text-red-500 bg-red-50' : 'text-green-500 bg-green-50'}`}>
         {data.change}
       </span>
     </div>
@@ -131,27 +131,18 @@ const App: React.FC = () => {
 
         <div className="mb-20">
           <Heading subtitle="2025 vs 2024">KPIs principales / Orgánico + paid</Heading>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {mainKPIs.map((kpi, idx) => <KPICard key={idx} data={kpi} />)}
           </div>
         </div>
 
-        <div className="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="mb-20 grid grid-cols-1 gap-12 items-start">
           <div>
             <Heading subtitle="Comparativo 23 vs 24 vs 25">Interanual Boletos</Heading>
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
               <InterannualTicketsChart data={interannualData} />
             </div>
-            <div className="mt-8 grid grid-cols-2 gap-4">
-              <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
-                <p className="text-sm font-bold text-gray-500 uppercase">Crecimiento 24 vs 23</p>
-                <p className="text-3xl font-black text-gray-700">+19.2%</p>
-              </div>
-              <div className="p-4 bg-blue-50 rounded-xl border border-blue-100">
-                <p className="text-sm font-bold text-blue-700 uppercase">Proyección 2025</p>
-                <p className="text-3xl font-black text-blue-800">Crecimiento Sostenido</p>
-              </div>
-            </div>
+
           </div>
           <div>
             <Heading subtitle="Noviembre y Diciembre 2025">Líneas más vendidas</Heading>
@@ -186,6 +177,9 @@ const App: React.FC = () => {
               </div>
             </div>
           </div>
+          <p className="mt-6 text-gray-500 italic text-sm">
+            * Los resultados de Mayo 2024 contienen errores en la medición por problemas con la plataforma de VEB, contabilizando la mayor parte de ventas y usuarios como orgánico
+          </p>
         </div>
 
         <div className="bg-gray-900 text-white rounded-[2rem] p-12 relative overflow-hidden">
