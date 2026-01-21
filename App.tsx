@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Section, Heading, SectionTitle } from './components/Layout';
 import { ICONS, COLORS } from './constants';
-import { mainKPIs, interannualData, routePerformance, socialAudience, competitorMarketShare2025, paidChannelData, organicChannelData } from './data';
+import { mainKPIs, interannualData, routePerformance, socialAudience, competitorMarketShare2025, paidChannelData, organicChannelData, audienceOverlapData } from './data';
 import { KPIData } from './types';
 import { InterannualTicketsChart, RoutesBarChart, MarketTrendChart, ChannelEvolutionChart } from './components/Charts';
 
@@ -278,6 +278,65 @@ const App: React.FC = () => {
             </div>
             <div className="p-6 border-l-4 border-yellow-500 bg-white shadow-sm">
               <p className="text-gray-900 font-bold italic">Oportunidad de crecimiento significativa en Búsqueda Orgánica.</p>
+            </div>
+          </div>
+
+          <div className="mt-16">
+            <Heading subtitle="Oportunidad de Crecimiento vs Competencia">Superposición de Audiencia</Heading>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              {audienceOverlapData.map((item: any, index: number) => {
+                // Determine approximate visual size logic
+                return (
+                  <div key={index} className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col h-full hover:shadow-md transition-all">
+                    {/* Visual Header / Venn Diagram Approximation */}
+                    <div className="h-32 relative flex items-center justify-center mb-4 bg-gray-50/50 rounded-lg overflow-hidden">
+                      <div className="relative w-full max-w-[200px] h-full flex items-center justify-center">
+                        {/* Andesmar Circle */}
+                        <div className="absolute w-20 h-20 rounded-full bg-[#3B82F6] opacity-60 mix-blend-multiply left-6 z-10 border-2 border-white"></div>
+                        {/* Competitor Circle */}
+                        <div className="absolute w-24 h-24 rounded-full opacity-60 mix-blend-multiply right-4 z-10 border-2 border-white" style={{ backgroundColor: item.color }}></div>
+                      </div>
+                    </div>
+
+                    {/* Legend / Counts */}
+                    <div className="mb-4 space-y-1">
+                      <div className="flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#3B82F6]"></div>
+                          <span className="text-gray-600 font-medium">andesmar.com</span>
+                        </div>
+                        <span className="font-bold text-gray-900">64.7K</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }}></div>
+                          <span className="text-gray-600 font-medium truncate max-w-[100px]">{item.competitor}</span>
+                        </div>
+                        {/* Calculate competitor total roughly as potential + overlap */}
+                        <span className="font-bold text-gray-900">{((item.potential_audience + item.overlap) / 1000).toFixed(1)}K</span>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-gray-100 pt-3 space-y-2 mt-auto">
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-gray-500">Total Audience</span>
+                        <span className="font-bold text-gray-900">{((item.potential_audience + item.overlap + 60000) / 1000).toFixed(1)}K</span>
+                      </div>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-gray-500">Potential Audience</span>
+                        <span className="font-bold text-gray-900">{(item.potential_audience / 1000).toFixed(1)}K</span>
+                      </div>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-gray-500">Overlap</span>
+                        <div className="flex items-center gap-1">
+                          <span className="font-bold text-gray-900">{item.overlap_percentage}%</span>
+                          <span className="text-gray-400">({(item.overlap / 1000).toFixed(1)}K)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

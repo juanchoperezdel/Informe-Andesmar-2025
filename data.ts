@@ -51,6 +51,13 @@ export const competitorMarketShare2025 = [
   { domain: 'viatac.com.ar', total: 8.55, total_2024: 11.09, ai_traffic: 482 },
 ];
 
+export const audienceOverlapData = [
+  { competitor: 'flechabus.com.ar', potential_audience: 147600, overlap: 4300, overlap_percentage: 2.03, color: '#4ADE80' },
+  { competitor: 'plusmar.com.ar', potential_audience: 82100, overlap: 846, overlap_percentage: 0.58, color: '#FB923C' },
+  { competitor: 'nuevachevallier.com', potential_audience: 49500, overlap: 5700, overlap_percentage: 5.03, color: '#C084FC' },
+  { competitor: 'viatac.com.ar', potential_audience: 43100, overlap: 2000, overlap_percentage: 1.84, color: '#FCD34D' },
+];
+
 export const paidChannelData: ChannelData[] = [
   { month: 'Ene', vol2024: 12211, vol2025: 14640, variation: 20 },
   { month: 'Feb', vol2024: 11533, vol2025: 10964, variation: -5 },
