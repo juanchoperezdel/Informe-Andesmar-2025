@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Section, Heading, SectionTitle } from './components/Layout';
 import { ICONS, COLORS } from './constants';
-import { mainKPIs, interannualData, routePerformance, socialAudience, competitorMarketShare2025, paidChannelData, organicChannelData, audienceOverlapData } from './data';
+import { mainKPIs, interannualData, routePerformance, routePerformanceP10, socialAudience, competitorMarketShare2025, paidChannelData, organicChannelData, audienceOverlapData, concentradorasMarketShare, concentradorasAudienceOverlapData } from './data';
 import { KPIData } from './types';
 import { InterannualTicketsChart, RoutesBarChart, MarketTrendChart, ChannelEvolutionChart } from './components/Charts';
 
@@ -145,9 +145,16 @@ const App: React.FC = () => {
 
           </div>
           <div>
-            <Heading subtitle="Noviembre y Diciembre 2025">Líneas más vendidas</Heading>
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-              <RoutesBarChart data={routePerformance} />
+            <Heading subtitle="Octubre a Diciembre 2025">Líneas más vendidas</Heading>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h4 className="text-sm font-bold text-gray-500 uppercase mb-4 text-center">Venta Propia (Andesmar)</h4>
+                <RoutesBarChart data={routePerformance} />
+              </div>
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h4 className="text-sm font-bold text-gray-500 uppercase mb-4 text-center">Venta Plataforma 10</h4>
+                <RoutesBarChart data={routePerformanceP10} />
+              </div>
             </div>
             <p className="mt-6 text-gray-500 italic text-sm">
               * Datos basados en el reporte de venta por tramos emitidos durante el periodo 2025.
@@ -231,12 +238,7 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        <div className="mb-20">
-          <Heading subtitle="Total Addressable Market (TAM)">Tamaño del mercado</Heading>
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-            <MarketTrendChart />
-          </div>
-        </div>
+
 
         <div className="mb-20">
           <Heading subtitle="Participación de Tráfico">Market Share - competidores directos</Heading>
@@ -331,6 +333,118 @@ const App: React.FC = () => {
                         <div className="flex items-center gap-1">
                           <span className="font-bold text-gray-900">{item.overlap_percentage}%</span>
                           <span className="text-gray-400">({(item.overlap / 1000).toFixed(1)}K)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Section 03: Competencia Concentradoras */}
+      <Section id="concentradoras" className="bg-gray-50">
+        <SectionTitle number="03" title="Análisis de Competencia (Concentradoras)" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <p className="text-gray-500 text-sm font-bold uppercase mb-2">Dominios del mercado</p>
+            <p className="text-4xl font-black text-gray-900">13 <span className="text-gray-400 text-xl">/13</span></p>
+          </div>
+          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <p className="text-gray-500 text-sm font-bold uppercase mb-2">Tráfico del mercado</p>
+            <p className="text-4xl font-black text-gray-900">62,0 M <span className="text-red-500 text-lg">↓31,5 %</span></p>
+            <p className="text-xs text-gray-400 mt-1">vs 90.5 M en 2024</p>
+          </div>
+          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <p className="text-gray-500 text-sm font-bold uppercase mb-2">Costo tráfico mercado</p>
+            <p className="text-4xl font-black text-gray-900">$5,8 M <span className="text-green-500 text-lg">↑100,0 %</span></p>
+            <p className="text-xs text-gray-400 mt-1">vs $2.9 M en 2024</p>
+          </div>
+        </div>
+
+        <div className="mb-20">
+          <Heading subtitle="Participación de Tráfico">Market Share - concentradoras</Heading>
+          <div className="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-100">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-gray-100 bg-gray-50">
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Dominio</th>
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Total 2025</th>
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Total 2024</th>
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Cambio</th>
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Tráfico IA Total 2025</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                {concentradorasMarketShare.map((row: any, i) => {
+                  const change = ((row.total - row.total_2024) / row.total_2024) * 100;
+                  return (
+                    <tr key={i} className={`hover:bg-blue-50/30 transition-colors ${row.domain === 'andesmar.com' ? 'bg-blue-50 font-bold' : ''}`}>
+                      <td className="px-6 py-4 text-sm text-gray-900">{row.domain}</td>
+                      <td className="px-6 py-4 text-sm text-gray-900">{row.total}%</td>
+                      <td className="px-6 py-4 text-sm text-gray-900 text-gray-500">{row.total_2024}%</td>
+                      <td className={`px-6 py-4 text-sm font-bold ${change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                        {change >= 0 ? '↑' : '↓'} {Math.abs(change).toFixed(2)}%
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-900">{row.ai_traffic.toLocaleString()}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-16">
+            <Heading subtitle="Oportunidad de Crecimiento vs Concentradoras">Superposición de Audiencia</Heading>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              {concentradorasAudienceOverlapData.map((item: any, index: number) => {
+                return (
+                  <div key={index} className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col h-full hover:shadow-md transition-all">
+                    {/* Visual Header / Venn Diagram Approximation */}
+                    <div className="h-32 relative flex items-center justify-center mb-4 bg-gray-50/50 rounded-lg overflow-hidden">
+                      <div className="relative w-full max-w-[200px] h-full flex items-center justify-center">
+                        {/* Andesmar Circle */}
+                        <div className="absolute w-20 h-20 rounded-full bg-[#3B82F6] opacity-60 mix-blend-multiply left-6 z-10 border-2 border-white"></div>
+                        {/* Competitor Circle */}
+                        <div className="absolute w-24 h-24 rounded-full opacity-60 mix-blend-multiply right-4 z-10 border-2 border-white" style={{ backgroundColor: item.color }}></div>
+                      </div>
+                    </div>
+
+                    {/* Legend / Counts */}
+                    <div className="mb-4 space-y-1">
+                      <div className="flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#3B82F6]"></div>
+                          <span className="text-gray-600 font-medium">andesmar.com</span>
+                        </div>
+                        <span className="font-bold text-gray-900">64.7K</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }}></div>
+                          <span className="text-gray-600 font-medium truncate max-w-[100px]">{item.competitor}</span>
+                        </div>
+                        <span className="font-bold text-gray-900">{((item.potential_audience + item.overlap) / 1000000).toFixed(1)}M</span>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-gray-100 pt-3 space-y-2 mt-auto">
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-gray-500">Total Audience</span>
+                        <span className="font-bold text-gray-900">{((item.potential_audience + item.overlap + 772030) / 1000000).toFixed(1)}M</span>
+                      </div>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-gray-500">Potential Audience</span>
+                        <span className="font-bold text-gray-900">{(item.potential_audience / 1000000).toFixed(1)}M</span>
+                      </div>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-gray-500">Overlap</span>
+                        <div className="flex items-center gap-1">
+                          <span className="font-bold text-gray-900">{item.overlap_percentage}%</span>
+                          <span className="text-gray-400">({(item.overlap / 1000).toFixed(0)}K)</span>
                         </div>
                       </div>
                     </div>

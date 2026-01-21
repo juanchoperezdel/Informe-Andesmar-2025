@@ -25,11 +25,19 @@ export const interannualData: MonthlyTicketData[] = [
 ];
 
 export const routePerformance: RouteData[] = [
-  { name: 'MZA → STGO', organic: 0, paid: 1446, referral: 0, total: 1446 },
-  { name: 'STGO → MZA', organic: 0, paid: 930, referral: 0, total: 930 },
-  { name: 'MZA → VIÑA', organic: 0, paid: 910, referral: 0, total: 910 },
-  { name: 'VIÑA → MZA', organic: 0, paid: 741, referral: 0, total: 741 },
-  { name: 'BAR → PMO', organic: 0, paid: 348, referral: 0, total: 348 },
+  { name: 'MZA → STGO', organic: 0, paid: 1776, referral: 0, total: 1776 },
+  { name: 'STGO → MZA', organic: 0, paid: 1207, referral: 0, total: 1207 },
+  { name: 'MZA → VIÑA', organic: 0, paid: 959, referral: 0, total: 959 },
+  { name: 'VIÑA → MZA', organic: 0, paid: 784, referral: 0, total: 784 },
+  { name: 'BAR → PMO', organic: 0, paid: 457, referral: 0, total: 457 },
+];
+
+export const routePerformanceP10: RouteData[] = [
+  { name: 'RETIRO → MDP', organic: 0, paid: 1687, referral: 0, total: 1687 },
+  { name: 'MZA → S. RAFAEL', organic: 0, paid: 1405, referral: 0, total: 1405 },
+  { name: 'MDP → RETIRO', organic: 0, paid: 1320, referral: 0, total: 1320 },
+  { name: 'CBA → MZA', organic: 0, paid: 1264, referral: 0, total: 1264 },
+  { name: 'RETIRO → MZA', organic: 0, paid: 1133, referral: 0, total: 1133 },
 ];
 
 export const socialAudience: AudienceData[] = [
