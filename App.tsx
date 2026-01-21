@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Section, Heading, SectionTitle } from './components/Layout';
 import { ICONS, COLORS } from './constants';
-import { mainKPIs, interannualData, routePerformance, socialAudience, competitorMarketShare2024, paidChannelData, organicChannelData } from './data';
+import { mainKPIs, interannualData, routePerformance, socialAudience, competitorMarketShare2025, paidChannelData, organicChannelData } from './data';
 import { KPIData } from './types';
 import { InterannualTicketsChart, RoutesBarChart, MarketTrendChart, ChannelEvolutionChart } from './components/Charts';
 
@@ -221,11 +221,13 @@ const App: React.FC = () => {
           </div>
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
             <p className="text-gray-500 text-sm font-bold uppercase mb-2">Tráfico del mercado</p>
-            <p className="text-4xl font-black text-gray-900">16,6 M <span className="text-green-500 text-lg">↑4,8 %</span></p>
+            <p className="text-4xl font-black text-gray-900">11,2 M <span className="text-red-500 text-lg">↓32,5 %</span></p>
+            <p className="text-xs text-gray-400 mt-1">vs 16.6 M en 2024</p>
           </div>
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
             <p className="text-gray-500 text-sm font-bold uppercase mb-2">Costo tráfico mercado</p>
-            <p className="text-4xl font-black text-gray-900">$687,8 mil <span className="text-green-500 text-lg">↑14,26 %</span></p>
+            <p className="text-4xl font-black text-gray-900">$1,0 M <span className="text-green-500 text-lg">↑45,4 %</span></p>
+            <p className="text-xs text-gray-400 mt-1">vs $687.8 mil en 2024</p>
           </div>
         </div>
 
@@ -237,30 +239,33 @@ const App: React.FC = () => {
         </div>
 
         <div className="mb-20">
-          <Heading subtitle="Participación de Tráfico">Market Share por Canal</Heading>
+          <Heading subtitle="Participación de Tráfico">Market Share - competidores directos</Heading>
           <div className="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-100">
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b border-gray-100 bg-gray-50">
                   <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Dominio</th>
-                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Total</th>
-                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Directo</th>
-                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Referido</th>
-                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Búsq. Org.</th>
-                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Tráfico Pago</th>
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Total 2025</th>
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Total 2024</th>
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Cambio</th>
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Tráfico IA Total 2025</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {competitorMarketShare2024.map((row, i) => (
-                  <tr key={i} className={`hover:bg-blue-50/30 transition-colors ${row.domain === 'andesmar.com' ? 'bg-blue-50 font-bold' : ''}`}>
-                    <td className="px-6 py-4 text-sm text-gray-900">{row.domain}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{row.total}%</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{row.directo}%</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{row.referido}%</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{row.busq_org}%</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{row.traf_pago}%</td>
-                  </tr>
-                ))}
+                {competitorMarketShare2025.map((row: any, i) => {
+                  const change = ((row.total - row.total_2024) / row.total_2024) * 100;
+                  return (
+                    <tr key={i} className={`hover:bg-blue-50/30 transition-colors ${row.domain === 'andesmar.com' ? 'bg-blue-50 font-bold' : ''}`}>
+                      <td className="px-6 py-4 text-sm text-gray-900">{row.domain}</td>
+                      <td className="px-6 py-4 text-sm text-gray-900">{row.total}%</td>
+                      <td className="px-6 py-4 text-sm text-gray-900 text-gray-500">{row.total_2024}%</td>
+                      <td className={`px-6 py-4 text-sm font-bold ${change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                        {change >= 0 ? '↑' : '↓'} {Math.abs(change).toFixed(2)}%
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-900">{row.ai_traffic.toLocaleString()}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

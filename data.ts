@@ -43,12 +43,12 @@ export const socialAudience: AudienceData[] = [
   { platform: 'Reddit', percentage: 32.4 },
 ];
 
-export const competitorMarketShare2024 = [
-  { domain: 'flechabus.com.ar', total: 25.9, directo: 32.1, referido: 8.14, busq_org: 19.99, traf_pago: 43.96 },
-  { domain: 'andesmar.com', total: 18.11, directo: 17.86, referido: 45.28, busq_org: 14.23, traf_pago: 24.41 },
-  { domain: 'viatac.com.ar', total: 11.09, directo: 7.34, referido: 1.6, busq_org: 17.65, traf_pago: 0.85 },
-  { domain: 'viabariloche.com.ar', total: 9.42, directo: 7.36, referido: 2.54, busq_org: 13.2, traf_pago: 1.49 },
-  { domain: 'plusmar.com.ar', total: 9.37, directo: 7.59, referido: 27.19, busq_org: 9.22, traf_pago: 3.67 },
+export const competitorMarketShare2025 = [
+  { domain: 'flechabus.com.ar', total: 35.12, total_2024: 25.9, ai_traffic: 2251 },
+  { domain: 'andesmar.com', total: 12.16, total_2024: 18.11, ai_traffic: 696 },
+  { domain: 'plusmar.com.ar', total: 8.92, total_2024: 9.37, ai_traffic: 384 },
+  { domain: 'nuevachevallier.com', total: 8.89, total_2024: 9.35, ai_traffic: 671 },
+  { domain: 'viatac.com.ar', total: 8.55, total_2024: 11.09, ai_traffic: 482 },
 ];
 
 export const paidChannelData: ChannelData[] = [

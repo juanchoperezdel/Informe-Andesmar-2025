@@ -56,18 +56,18 @@ export const RoutesBarChart: React.FC<{ data: any[] }> = ({ data }) => (
 
 export const MarketTrendChart: React.FC = () => {
   const data = [
-    { name: 'ene 2024', tam: 180 },
-    { name: 'feb 2024', tam: 150 },
-    { name: 'mar 2024', tam: 120 },
-    { name: 'abr 2024', tam: 130 },
-    { name: 'may 2024', tam: 135 },
-    { name: 'jun 2024', tam: 220 },
-    { name: 'jul 2024', tam: 150 },
-    { name: 'ago 2024', tam: 170 },
-    { name: 'sept 2024', tam: 190 },
-    { name: 'oct 2024', tam: 180 },
-    { name: 'nov 2024', tam: 210 },
-    { name: 'dic 2024', tam: 380 },
+    { name: 'ene 2025', tam: 45 },
+    { name: 'feb 2025', tam: 43 },
+    { name: 'mar 2025', tam: 38 },
+    { name: 'abr 2025', tam: 25 },
+    { name: 'may 2025', tam: 23 },
+    { name: 'jun 2025', tam: 28 },
+    { name: 'jul 2025', tam: 15 },
+    { name: 'ago 2025', tam: 30 },
+    { name: 'sept 2025', tam: 22 },
+    { name: 'oct 2025', tam: 50 },
+    { name: 'nov 2025', tam: 90 },
+    { name: 'dic 2025', tam: 100 },
   ];
 
   return (
