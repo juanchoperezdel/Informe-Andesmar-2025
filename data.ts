@@ -87,3 +87,19 @@ export const organicChannelData: ChannelData[] = [
   { month: 'Nov', vol2024: 6587, vol2025: 4364, variation: -34 },
   { month: 'Dic', vol2024: 8082, vol2025: 4010, variation: -50 },
 ];
+
+export const concentradorasMarketShare = [
+  { domain: 'centraldepasajes.com.ar', total: 33.72, total_2024: 34.64, ai_traffic: 5276 },
+  { domain: 'plataforma10.com.ar', total: 31.20, total_2024: 29.67, ai_traffic: 4364 },
+  { domain: 'busplus.com.ar', total: 10.59, total_2024: 9.48, ai_traffic: 448 },
+  { domain: 'busbud.com', total: 6.33, total_2024: 8.49, ai_traffic: 5279 },
+  { domain: 'flechabus.com.ar', total: 6.32, total_2024: 4.06, ai_traffic: 2251 },
+  { domain: 'andesmar.com', total: 2.19, total_2024: 2.55, ai_traffic: 696 },
+];
+
+export const concentradorasAudienceOverlapData = [
+  { competitor: 'plataforma10.com.ar', potential_audience: 1200000, overlap: 19300, overlap_percentage: 1.58, color: '#00C49F' },
+  { competitor: 'centraldepasajes.com.ar', potential_audience: 982900, overlap: 10100, overlap_percentage: 0.97, color: '#FFBB28' },
+  { competitor: 'busplus.com.ar', potential_audience: 237400, overlap: 8400, overlap_percentage: 2.77, color: '#8884d8' },
+  { competitor: 'busbud.com', potential_audience: 185600, overlap: 6900, overlap_percentage: 2.75, color: '#FFD700' },
+];
