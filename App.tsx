@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Section, Heading, SectionTitle } from './components/Layout';
 import { ICONS, COLORS } from './constants';
-import { mainKPIs, interannualData, routePerformance, routePerformanceP10, socialAudience, competitorMarketShare2025, paidChannelData, organicChannelData, audienceOverlapData, concentradorasMarketShare, concentradorasAudienceOverlapData } from './data';
+import { mainKPIs, interannualData, routePerformance, routePerformanceP10, socialAudience, competitorMarketShare2025, paidChannelData, organicChannelData, audienceOverlapData, concentradorasMarketShare, concentradorasAudienceOverlapData, ageDemographics } from './data';
 import { KPIData } from './types';
-import { InterannualTicketsChart, RoutesBarChart, MarketTrendChart, ChannelEvolutionChart } from './components/Charts';
+import { InterannualTicketsChart, RoutesBarChart, MarketTrendChart, ChannelEvolutionChart, AgeDistributionChart } from './components/Charts';
 
 const KPICard: React.FC<{ data: KPIData }> = ({ data }) => (
   <div className="bg-white border-2 border-andesmar-blue p-6 flex flex-col justify-between h-full hover:shadow-lg transition-shadow">
@@ -251,11 +251,13 @@ const App: React.FC = () => {
                   <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Total 2024</th>
                   <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Cambio</th>
                   <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Tráfico IA Total 2025</th>
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase text-right">Visitas 2025</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
                 {competitorMarketShare2025.map((row: any, i) => {
                   const change = ((row.total - row.total_2024) / row.total_2024) * 100;
+                  const visits = (row.total / 100) * 11200000;
                   return (
                     <tr key={i} className={`hover:bg-blue-50/30 transition-colors ${row.domain === 'andesmar.com' ? 'bg-blue-50 font-bold' : ''}`}>
                       <td className="px-6 py-4 text-sm text-gray-900">{row.domain}</td>
@@ -265,6 +267,9 @@ const App: React.FC = () => {
                         {change >= 0 ? '↑' : '↓'} {Math.abs(change).toFixed(2)}%
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-900">{row.ai_traffic.toLocaleString()}</td>
+                      <td className="px-6 py-4 text-sm text-gray-900 text-right font-medium">
+                        {(visits / 1000000).toFixed(2)}M
+                      </td>
                     </tr>
                   );
                 })}
@@ -376,11 +381,13 @@ const App: React.FC = () => {
                   <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Total 2024</th>
                   <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Cambio</th>
                   <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Tráfico IA Total 2025</th>
+                  <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase text-right">Visitas 2025</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
                 {concentradorasMarketShare.map((row: any, i) => {
                   const change = ((row.total - row.total_2024) / row.total_2024) * 100;
+                  const visits = (row.total / 100) * 62000000;
                   return (
                     <tr key={i} className={`hover:bg-blue-50/30 transition-colors ${row.domain === 'andesmar.com' ? 'bg-blue-50 font-bold' : ''}`}>
                       <td className="px-6 py-4 text-sm text-gray-900">{row.domain}</td>
@@ -390,6 +397,9 @@ const App: React.FC = () => {
                         {change >= 0 ? '↑' : '↓'} {Math.abs(change).toFixed(2)}%
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-900">{row.ai_traffic.toLocaleString()}</td>
+                      <td className="px-6 py-4 text-sm text-gray-900 text-right font-medium">
+                        {(visits / 1000000).toFixed(2)}M
+                      </td>
                     </tr>
                   );
                 })}
@@ -460,50 +470,38 @@ const App: React.FC = () => {
       <Section id="audiencia" className="bg-white">
         <Heading subtitle="Demografía y Comportamiento">Resumen de Audiencia</Heading>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          <div className="bg-blue-50 p-8 rounded-[2rem] border border-blue-100">
-            <h4 className="text-xl font-black text-andesmar-blue uppercase mb-6">Demografía</h4>
-            <div className="space-y-6">
-              <div>
-                <p className="text-sm font-bold text-gray-500 uppercase">Edad</p>
-                <p className="text-2xl font-black text-gray-900">25-34</p>
-                <p className="text-sm text-gray-400">24,46 % del total</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+          <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-pink-50 rounded-bl-[4rem] -z-0"></div>
+            <h4 className="text-xl font-black text-gray-900 uppercase mb-8 relative z-10">Género</h4>
+
+            <div className="relative z-10">
+              <div className="flex items-end justify-between mb-2 px-1">
+                <div className="text-pink-500 font-bold">
+                  <p className="text-3xl font-black">58.1%</p>
+                  <p className="text-xs uppercase tracking-wider">Femenino</p>
+                </div>
+                <div className="text-blue-500 font-bold text-right">
+                  <p className="text-3xl font-black">41.9%</p>
+                  <p className="text-xs uppercase tracking-wider">Masculino</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-bold text-gray-500 uppercase">Género</p>
-                <p className="text-2xl font-black text-gray-900">Femenino</p>
-                <p className="text-sm text-gray-400">59,22 % de participación</p>
+
+              <div className="w-full h-6 bg-gray-100 rounded-full overflow-hidden flex">
+                <div style={{ width: '58.12%' }} className="h-full bg-pink-400 shadow-[0_0_15px_rgba(244,114,182,0.5)] relative"></div>
+                <div style={{ width: '41.88%' }} className="h-full bg-blue-400 shadow-[0_0_15px_rgba(96,165,250,0.5)] relative"></div>
               </div>
+              <p className="mt-6 text-sm text-gray-400 leading-relaxed">
+                La audiencia femenina lidera la participación, alineado con la decisión de compra en viajes familiares y turismo.
+              </p>
             </div>
           </div>
-          <div className="bg-orange-50 p-8 rounded-[2rem] border border-orange-100">
-            <h4 className="text-xl font-black text-orange-600 uppercase mb-6">Socioeconómicos</h4>
-            <div className="space-y-6">
-              <div>
-                <p className="text-sm font-bold text-gray-500 uppercase">Empleo</p>
-                <p className="text-2xl font-black text-gray-900">Tiempo Completo</p>
-                <p className="text-sm text-gray-400">36,64 % de usuarios</p>
-              </div>
-              <div>
-                <p className="text-sm font-bold text-gray-500 uppercase">Ingresos</p>
-                <p className="text-2xl font-black text-gray-900">Bajo / Medio</p>
-                <p className="text-sm text-gray-400">76,49 % representatividad</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-purple-50 p-8 rounded-[2rem] border border-purple-100">
-            <h4 className="text-xl font-black text-purple-600 uppercase mb-6">Comportamiento</h4>
-            <div className="space-y-6">
-              <div>
-                <p className="text-sm font-bold text-gray-500 uppercase">Intereses</p>
-                <p className="text-2xl font-black text-gray-900">Logística y Transp.</p>
-                <p className="text-sm text-gray-400">99,44 % afinidad</p>
-              </div>
-              <div>
-                <p className="text-sm font-bold text-gray-500 uppercase">Red Social Principal</p>
-                <p className="text-2xl font-black text-gray-900">YouTube</p>
-                <p className="text-sm text-gray-400">81,48 % alcance</p>
-              </div>
+
+          <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-[4rem] -z-0"></div>
+            <h4 className="text-xl font-black text-gray-900 uppercase mb-2 relative z-10">Edad</h4>
+            <div className="h-[250px] relative z-10 -ml-4">
+              <AgeDistributionChart data={ageDemographics} />
             </div>
           </div>
         </div>
