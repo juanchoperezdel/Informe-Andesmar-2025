@@ -41,14 +41,20 @@ export const routePerformanceP10: RouteData[] = [
 ];
 
 export const socialAudience: AudienceData[] = [
-  { platform: 'YouTube', percentage: 81.48 },
-  { platform: 'Instagram', percentage: 76.23 },
-  { platform: 'Facebook', percentage: 74.54 },
-  { platform: 'TikTok', percentage: 49.5 },
-  { platform: 'Twitter', percentage: 43.15 },
-  { platform: 'Pinterest', percentage: 38.45 },
-  { platform: 'LinkedIn', percentage: 37.9 },
-  { platform: 'Reddit', percentage: 32.4 },
+  { platform: 'YouTube', percentage: 64.14 },
+  { platform: 'Facebook', percentage: 42.41 },
+  { platform: 'Instagram', percentage: 39.52 },
+  { platform: 'Reddit', percentage: 31.96 },
+  { platform: 'TikTok', percentage: 31.13 },
+];
+
+export const ageDemographics = [
+  { range: '18-24', percentage: 10 },
+  { range: '25-34', percentage: 24 },
+  { range: '35-44', percentage: 12 },
+  { range: '45-54', percentage: 20 },
+  { range: '55-64', percentage: 14 },
+  { range: '65+', percentage: 20 },
 ];
 
 export const competitorMarketShare2025 = [
