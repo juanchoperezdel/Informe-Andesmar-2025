@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Section, Heading, SectionTitle } from './components/Layout';
 import { ICONS, COLORS } from './constants';
-import { mainKPIs, interannualData, routePerformance, routePerformanceP10, socialAudience, competitorMarketShare2025, paidChannelData, organicChannelData, audienceOverlapData, concentradorasMarketShare, concentradorasAudienceOverlapData, ageDemographics } from './data';
+import { mainKPIs, interannualData, routePerformance, routePerformanceP10, socialAudience, competitorMarketShare2025, paidChannelData, organicChannelData, audienceOverlapData, concentradorasMarketShare, concentradorasAudienceOverlapData, ageDemographics, channelDistribution2025 } from './data';
 import { KPIData } from './types';
-import { InterannualTicketsChart, RoutesBarChart, MarketTrendChart, ChannelEvolutionChart, AgeDistributionChart } from './components/Charts';
+import { InterannualTicketsChart, RoutesBarChart, MarketTrendChart, ChannelEvolutionChart, AgeDistributionChart, ChannelDistributionChart } from './components/Charts';
 
 const KPICard: React.FC<{ data: KPIData }> = ({ data }) => (
   <div className="bg-white border-2 border-andesmar-blue p-6 flex flex-col justify-between h-full hover:shadow-lg transition-shadow">
@@ -89,20 +89,7 @@ const App: React.FC = () => {
               Andesmar
             </div>
           </div>
-          <div className="flex-shrink-0 flex items-center gap-8">
-            <div className="w-48 h-auto opacity-80">
-              <svg viewBox="0 0 200 50" className="w-full h-full fill-andesmar-blue">
-                <text x="0" y="35" fontSize="24" fontWeight="900">ANDESMAR</text>
-              </svg>
-            </div>
-            <div className="h-12 w-px bg-gray-200"></div>
-            <div className="w-24 h-auto">
-              <svg viewBox="0 0 100 50" className="w-full h-full stroke-andesmar-blue fill-none">
-                <path d="M10,40 L30,10 L70,40 L90,10" strokeWidth="4" />
-                <text x="35" y="45" fontSize="12" fontWeight="800" fill="#0096FF">VETA</text>
-              </svg>
-            </div>
-          </div>
+
         </div>
       </Section>
 
@@ -127,7 +114,7 @@ const App: React.FC = () => {
 
       {/* Section 01: Logros */}
       <Section id="logros">
-        <SectionTitle number="01" title="Evolución 2023-2025" />
+        <SectionTitle number="01" title="Evolución 2025" />
 
         <div className="mb-20">
           <Heading subtitle="2025 vs 2024">KPIs principales / Orgánico + paid</Heading>
@@ -187,6 +174,16 @@ const App: React.FC = () => {
           <p className="mt-6 text-gray-500 italic text-sm">
             * Los resultados de Mayo 2024 contienen errores en la medición por problemas con la plataforma de VEB, contabilizando la mayor parte de ventas y usuarios como orgánico
           </p>
+
+          <div className="mt-12">
+            <Heading subtitle="Mix de Canales">Participación Mensual Paid vs Orgánico</Heading>
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+              <ChannelDistributionChart data={channelDistribution2025} />
+            </div>
+            <p className="mt-4 text-gray-500 text-sm">
+              Se observa claramente cómo el canal Paid (Azul) sostiene la estructura de ventas durante todo el año, incrementando su participación estratégicamente en los meses donde la demanda orgánica se contrae.
+            </p>
+          </div>
         </div>
 
         <div className="bg-gray-900 text-white rounded-[2rem] p-12 relative overflow-hidden">

@@ -117,3 +117,12 @@ export const concentradorasAudienceOverlapData = [
   { competitor: 'busplus.com.ar', potential_audience: 237400, overlap: 8400, overlap_percentage: 2.77, color: '#8884d8' },
   { competitor: 'busbud.com', potential_audience: 185600, overlap: 6900, overlap_percentage: 2.75, color: '#FFD700' },
 ];
+
+export const channelDistribution2025 = paidChannelData.map((pctItem, index) => {
+  const organicItem = organicChannelData[index];
+  return {
+    month: pctItem.month,
+    paid: pctItem.vol2025,
+    organic: organicItem.vol2025,
+  };
+});

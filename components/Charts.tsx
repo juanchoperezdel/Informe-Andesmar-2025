@@ -124,3 +124,19 @@ export const AgeDistributionChart: React.FC<{ data: any[] }> = ({ data }) => (
     </ResponsiveContainer>
   </div>
 );
+
+export const ChannelDistributionChart: React.FC<{ data: any[] }> = ({ data }) => (
+  <div className="h-[400px] w-full mt-8">
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart data={data} stackOffset="expand" margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
+        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#6B7280', fontSize: 12 }} />
+        <YAxis axisLine={false} tickLine={false} tick={{ fill: '#6B7280', fontSize: 12 }} tickFormatter={(val) => `${(val * 100).toFixed(0)}%`} />
+        <Tooltip content={<CustomTooltip />} />
+        <Legend />
+        <Bar name="Paid (Publicidad)" dataKey="paid" stackId="a" fill="#4F46E5" radius={[0, 0, 0, 0]} />
+        <Bar name="Orgánico (SEO)" dataKey="organic" stackId="a" fill="#94A3B8" radius={[4, 4, 0, 0]} />
+      </BarChart>
+    </ResponsiveContainer>
+  </div>
+);
